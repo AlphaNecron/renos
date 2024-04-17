@@ -23,7 +23,8 @@ export default function attach(router: RouterType) {
 		if (!res.body) return new Response('Not found!', { status: 404 });
 		res.body.pipeTo(writable);
 		return new Response(readable, {
-			status: res.status
+			status: res.status,
+			headers: res.headers
 		});
 	});
 
@@ -40,7 +41,8 @@ export default function attach(router: RouterType) {
 		if (!res.body) return new Response('Not found!', { status: 404 });
 		res.body.pipeTo(writable);
 		return new Response(readable, {
-			status: res.status
+			status: res.status,
+			headers: res.headers
 		});
 	});
 }

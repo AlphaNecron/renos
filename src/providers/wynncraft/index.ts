@@ -142,6 +142,16 @@ export function render(stats: ApiStats) {
 	return `
 	<svg xmlns='http://www.w3.org/2000/svg'>
 		<style>
+			@font-face {
+				font-family: 'Minecraft';
+				src: url('/wynncraft/fonts/MinecraftRegular-Bmg3.otf');
+				font-weight: normal;
+			}
+			@font-face {
+				font-family: 'Minecraft';
+				src: url('/wynncraft/fonts/MinecraftBold-nMK1.otf');
+				font-weight: bold;
+			}
 			svg {
 				font-family: Minecraft, sans-serif;
 			}

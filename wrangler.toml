@@ -3,5 +3,8 @@ name = "renos"
 main = "src/index.ts"
 compatibility_date = "2024-04-05"
 
+[placement]
+mode = "smart"
+
 [site]
 bucket = "./public"
