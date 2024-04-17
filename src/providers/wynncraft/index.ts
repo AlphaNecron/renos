@@ -94,7 +94,7 @@ function renderChar(char: Character, row: number, col: number) {
 
 			<g transform='translate(${offset}, ${charCardHeight - 12})' font-weight='bold'>
 				<line x1='6' x2='${estIconSize - 6}' fill='red' stroke-width='12' stroke='#465B50' stroke-linecap='round'/>
-				<line x1='6' x2='${(estIconSize - 6) * combatProf.xp / 100}' stroke-width='12' stroke='#8EC364' stroke-linecap='round'/>
+				<line x1='6' x2='${(estIconSize - 6) * Math.min(combatProf.xp / 100, 1)}' stroke-width='12' stroke='#8EC364' stroke-linecap='round'/>
 				<text fill='white' x='${estIconSize / 2 - combatProf.level.toString().length - 6}' y='4' font-size='smaller'>${combatProf.level}</text>
 			</g>
 
