@@ -177,7 +177,3 @@ export function render(stats: ApiStats) {
 	</svg>
 	`;
 }
-
-function sanitizeSvg(raw: string) {
-	
-}
