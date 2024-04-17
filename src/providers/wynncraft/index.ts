@@ -136,8 +136,8 @@ export function render(stats: ApiStats) {
 	let rank = (p.rank === 'Player' ? p.meta.tag?.value : p.rank)?.toLowerCase();
 	rank = ranks[rank] || rank;
 	const chars = Object.values(p.characters);
-	const estHeight = Math.max(Math.ceil(chars.length / 2) * (charCardHeight + charCardGap) + 48, rootMinHeight);
-	const alternativeStyle = chars.length > 4;
+	const alternativeStyle = chars.length >= 6;
+	const estHeight = Math.max(Math.ceil(chars.length / 2) * (charCardHeight + charCardGap) + (alternativeStyle ? 48 : 64), rootMinHeight);
 	p.meta.location.server ||= 'OFFLINE';
 	return `
 	<svg xmlns='http://www.w3.org/2000/svg'>
