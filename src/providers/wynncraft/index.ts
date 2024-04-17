@@ -156,20 +156,20 @@ export function render(stats: ApiStats) {
 			<image x='4' y='-2' height='18' width='${badgeWidths[rank] * 2}' href='/wynncraft/resource/badges/rank_${rank}.svg'/>
 			<text x='${12 + badgeWidths[rank] * 2}' y='13' font-size='large' font-weight='bold' fill='${rankColors[rank]}' filter='drop-shadow(0.5px 0.5px 0px black)'>${p.username}</text>
 			<g transform='translate(${rootWidth - (p.meta.location.server?.length || 0) * 10 - 48}, 12)'>
-				${p.meta.location.online && `<text font-weight='bold' font-size='smaller' fill='${colors.green}'>${p.meta.location.server}</text>`}
+				${p.meta.location.online ? `<text font-weight='bold' font-size='smaller' fill='${colors.green}'>${p.meta.location.server}</text>` : ''}
 				<image x='${(p.meta.location.server?.length || 0) * 10 + 4}' y='-12' width='15' height='15' href='/wynncraft/${p.meta.location.online ? 'online' : 'offline'}.png'/>
 			</g>
 		</g>
 		<g transform='translate(12, 24)' font-size='small'>
 			<g transform='translate(0, 24)'>
 			<image href='/wynncraft/skin/${p.uuid}' width='128'/>
-			${alternativeStyle && renderGlobalStats(p, true, 12, 240)}
+			${alternativeStyle ? renderGlobalStats(p, true, 12, 240) : ''}
 			</g>
-			${!alternativeStyle && `
+			${!alternativeStyle ? `
 				<g transform='translate(144, 20)'>
 					${renderGlobalStats(p, false, 0, 0)}
 				</g>
-			`}
+			` : ''}
 			<g transform='translate(144, ${alternativeStyle ? 16 : 32})'>
 				${chars.map(((char, i) => renderChar(char, Math.floor(i / 2), i % 2))).join('')}
 			</g>
