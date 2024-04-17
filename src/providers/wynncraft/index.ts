@@ -70,17 +70,11 @@ const badgeWidths: Record<string, number> = {
 	'administrator': 35
 };
 
-console.log(Object.keys(rankColors));
-
 const gamemodes = ['hardcore', 'ironman', 'hunted', 'craftsman'];
 
 const professions = [
 	'mining', 'woodcutting', 'farming', 'fishing', 'armouring', 'tailoring', 'weaponsmithing', 'woodworking', 'jeweling', 'alchemism', 'scribing', 'cooking'
 ];
-
-function badge(rank: string) {
-	return `https://cdn.wynncraft.com/nextgen/badges/rank_${rank}.svg`;
-}
 
 function renderChar(char: Character, row: number, col: number) {
 	const charGamemodes = gamemodes.filter(m => char.gamemode[m]);
@@ -144,6 +138,7 @@ export function render(stats: ApiStats) {
 	const chars = Object.values(p.characters);
 	const estHeight = Math.max(Math.ceil(chars.length / 2) * (charCardHeight + charCardGap) + 48, rootMinHeight);
 	const alternativeStyle = chars.length > 4;
+	p.meta.location.server ||= 'OFFLINE';
 	return `
 	<svg xmlns='http://www.w3.org/2000/svg'>
 		<style>
@@ -155,9 +150,9 @@ export function render(stats: ApiStats) {
 		<g transform='translate(12, 12)'>
 			<image x='4' y='-2' height='18' width='${badgeWidths[rank] * 2}' href='/wynncraft/resource/badges/rank_${rank}.svg'/>
 			<text x='${12 + badgeWidths[rank] * 2}' y='13' font-size='large' font-weight='bold' fill='${rankColors[rank]}' filter='drop-shadow(0.5px 0.5px 0px black)'>${p.username}</text>
-			<g transform='translate(${rootWidth - (p.meta.location.server?.length || 0) * 10 - 48}, 12)'>
-				${p.meta.location.online ? `<text font-weight='bold' font-size='smaller' fill='${colors.green}'>${p.meta.location.server}</text>` : ''}
-				<image x='${(p.meta.location.server?.length || 0) * 10 + 4}' y='-12' width='15' height='15' href='/wynncraft/${p.meta.location.online ? 'online' : 'offline'}.png'/>
+			<g transform='translate(${rootWidth - (p.meta.location.server.length || 0) * 10 - 48}, 12)'>
+				<text font-weight='bold' font-size='smaller' fill='${p.meta.location.online ? colors.green : colors.red}'>${p.meta.location.online ? p.meta.location.server : 'OFFLINE'}</text>
+				<image x='${(p.meta.location.server.length || 0) * 10 + 4}' y='-12' width='15' height='15' href='/wynncraft/${p.meta.location.online ? 'online' : 'offline'}.png'/>
 			</g>
 		</g>
 		<g transform='translate(12, 24)' font-size='small'>
